@@ -1,7 +1,10 @@
 package pl.wbsoft.validators;
 
+import org.springframework.stereotype.Service;
+
 import java.math.BigDecimal;
 
+@Service
 public class AccountValidator {
 
     public String validName (String name) {
@@ -12,8 +15,9 @@ public class AccountValidator {
         // TODO
         return "";
     }
-    public BigDecimal validAmount (String amount) {
+    public String validAmount (String amount) {
         // TODO
-        return new BigDecimal(0);
-    }
+        return amount;
+
+        }
 }

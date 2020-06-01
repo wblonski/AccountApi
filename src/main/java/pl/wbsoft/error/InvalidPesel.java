@@ -1,11 +1,11 @@
-package pl.wbsoft.exceptions;
+package pl.wbsoft.error;
 
 public class InvalidPesel extends Exception{
 
     public InvalidPesel() {
     }
 
-    public InvalidPesel(Object paramValue) {
+    public InvalidPesel(String paramValue) {
 //        TODO
     }
 }

@@ -1,9 +1,9 @@
-package pl.wbsoft.exceptions;
+package pl.wbsoft.error;
 
 public class InvalidParam extends Exception {
 
     public InvalidParam() {}
-    public InvalidParam(Object paramValue ) {
+    public InvalidParam(String paramValue ) {
 //        TODO
     }
 }

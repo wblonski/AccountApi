@@ -1,35 +1,85 @@
 package pl.wbsoft.entities;
 
-import pl.wbsoft.utils.Pesel;
-
-import java.math.BigDecimal;
-import java.util.HashMap;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import java.io.Serializable;
 import java.util.Map;
-import java.util.Optional;
+import java.util.Objects;
 
-public class Account {
+@Entity
+public class Account  implements Serializable {
+    @Id
+    private String pesel;
     private String name;
     private String surname;
-    private Pesel pesel;
-    private Map<String, BigDecimal> amounts = new HashMap<>();
+    private String amountPLN;
+    private String amountUSD;
 
-    public Account(Map<String, Object> validParams) {
-
-        name = (String) validParams.get("name");
-        surname = (String) validParams.get("surname");
-        pesel = (Pesel) validParams.get("pesel");
-        amounts.put("PLN", (BigDecimal) validParams.get("amount"));
-        amounts.put("USD", new BigDecimal(0));
+    public Account() {
     }
 
-    public Pesel getPesel() {
+//    public Account(Map<String, String> params) {
+//        pesel = params.get("pesel");
+//        name = params.get("name");
+//        surname =  params.get("surname");
+//        amountPLN = params.get("amountPLN");
+//        amountUSD = params.get("amountUSD");
+//    }
+
+    public String getPesel() {
         return pesel;
     }
 
-    public Optional<Account> getAccount(Pesel pesel) {
-        if (this.pesel.equals(pesel)) {
-            return Optional.of(this);
-        }
-        else return Optional.empty();
+    public void setPesel(String pesel) {
+        this.pesel = pesel;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getSurname() {
+        return surname;
+    }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
+
+    public String getAmountPLN() {
+        return amountPLN;
+    }
+
+    public void setAmountPLN(String amountPLN) {
+        this.amountPLN = amountPLN;
+    }
+
+    public String getAmountUSD() {
+        return amountUSD;
+    }
+
+    public void setAmountUSD(String amountUSD) {
+        this.amountUSD = amountUSD;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Account)) return false;
+        Account account = (Account) o;
+        return pesel.equals(account.pesel) &&
+                name.equals(account.name) &&
+                surname.equals(account.surname) &&
+                amountPLN.equals(account.amountPLN) &&
+                amountUSD.equals(account.amountUSD);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(pesel, name, surname, amountPLN, amountUSD);
     }
 }

@@ -1,4 +1,4 @@
-package pl.wbsoft.exceptions;
+package pl.wbsoft.error;
 
 public class NotAdultClient extends Exception {
 }
