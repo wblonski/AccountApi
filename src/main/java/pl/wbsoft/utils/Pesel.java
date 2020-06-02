@@ -46,19 +46,20 @@ public class Pesel {
             int birthDay = getBirthDay();
             return LocalDate.of(birthYear, birthMonth, birthDay);
         }
+
         private int getBirthYear() throws InvalidPesel {
             int year = (10 * peselBytes[0]) + peselBytes[1];
             int month = 10 * peselBytes[2] + peselBytes[3];
-            if (month > 80 && month < 93) {
-                year += 1800;
-            } else if (month > 0 && month < 13) {
+            if (month >= 1 && month <= 12) {
                 year += 1900;
-            } else if (month > 20 && month < 33) {
+            } else if (month >= 21 && month <= 32) {
                 year += 2000;
-            } else if (month > 40 && month < 53) {
+            } else if (month >= 41 && month <= 52) {
                 year += 2100;
-            } else if (month > 60 && month < 73) {
+            } else if (month >= 61 && month <= 72) {
                 year += 2200;
+            } else if (month >= 81 && month <= 92) {
+                year += 1800;
             } else
                 throw new InvalidPesel();
             return year;
@@ -66,16 +67,17 @@ public class Pesel {
 
         private int getBirthMonth() throws InvalidPesel {
             int month = 10 * peselBytes[2] + peselBytes[3];
-            if (month > 80 && month < 93) {
-                month -= 80;
-            } else if (month > 20 && month < 33) {
+            if (month >= 1 && month <= 12) {
+                month -= 0;
+            } else if (month >= 21 && month <= 32) {
                 month -= 20;
-            } else if (month > 40 && month < 53) {
+            } else if (month >= 41 && month <= 52) {
                 month -= 40;
-            } else if (month > 60 && month < 73) {
+            } else if (month >= 61 && month <= 72) {
                 month -= 60;
-            }
-            else
+            } else if (month >= 81 && month <= 92) {
+                month -= 80;
+            } else
                 throw new InvalidPesel();
             return month;
         }
@@ -152,7 +154,6 @@ public class Pesel {
     }
 
 
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -165,9 +166,6 @@ public class Pesel {
     public int hashCode() {
         return Objects.hash(peselStr);
     }
-
-
-
 
 
 }

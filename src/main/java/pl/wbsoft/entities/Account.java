@@ -18,13 +18,13 @@ public class Account  implements Serializable {
     public Account() {
     }
 
-//    public Account(Map<String, String> params) {
-//        pesel = params.get("pesel");
-//        name = params.get("name");
-//        surname =  params.get("surname");
-//        amountPLN = params.get("amountPLN");
-//        amountUSD = params.get("amountUSD");
-//    }
+    public Account(Map<String, String> params) {
+        pesel = params.get("pesel");
+        name = params.get("name");
+        surname =  params.get("surname");
+        amountPLN = params.get("amountPLN");
+        amountUSD = params.get("amountUSD");
+    }
 
     public String getPesel() {
         return pesel;
