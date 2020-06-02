@@ -7,7 +7,7 @@ import java.util.Map;
 import java.util.Objects;
 
 @Entity
-public class Account  implements Serializable {
+public class Account implements Serializable {
     @Id
     private String pesel;
     private String name;
@@ -21,7 +21,7 @@ public class Account  implements Serializable {
     public Account(Map<String, String> params) {
         pesel = params.get("pesel");
         name = params.get("name");
-        surname =  params.get("surname");
+        surname = params.get("surname");
         amountPLN = params.get("amountPLN");
         amountUSD = params.get("amountUSD");
     }

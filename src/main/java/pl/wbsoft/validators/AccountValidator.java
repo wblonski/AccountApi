@@ -2,22 +2,22 @@ package pl.wbsoft.validators;
 
 import org.springframework.stereotype.Service;
 
-import java.math.BigDecimal;
-
 @Service
 public class AccountValidator {
 
-    public String validName (String name) {
+    public String validName(String name) {
         // TODO
         return "";
     }
-    public String validSurname (String surname) {
+
+    public String validSurname(String surname) {
         // TODO
         return "";
     }
-    public String validAmount (String amount) {
+
+    public String validAmount(String amount) {
         // TODO
         return amount;
 
-        }
+    }
 }

@@ -1,4 +1,5 @@
 package pl.wbsoft.enums;
+
 public enum AllowedCurrencies {
     PLN("PLN"), USD("USD");
     private String name;

@@ -35,10 +35,32 @@ public class Pesel {
         return peselStr;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Pesel)) return false;
+        Pesel pesel = (Pesel) o;
+        return Objects.equals(peselStr, pesel.peselStr);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(peselStr);
+    }
+
     private class PeselValidator {
 
         private static final int PESEL_LEN = 11;
         private final byte[] peselBytes = new byte[PESEL_LEN];
+
+        public PeselValidator(String utilPeselStr) throws InvalidPeselException {
+            if (utilPeselStr.length() != PESEL_LEN) {
+                throw new InvalidPeselException("");
+            }
+            for (int i = 0; i < PESEL_LEN; i++) {
+                peselBytes[i] = Byte.parseByte(utilPeselStr.substring(i, i + 1));
+            }
+        }
 
         public LocalDate getBirthDate() throws InvalidPeselException {
             int birthYear = getBirthYear();
@@ -84,15 +106,6 @@ public class Pesel {
 
         private int getBirthDay() {
             return 10 * peselBytes[4] + peselBytes[5];
-        }
-
-        public PeselValidator(String utilPeselStr) throws InvalidPeselException {
-            if (utilPeselStr.length() != PESEL_LEN) {
-                throw new InvalidPeselException("");
-            }
-            for (int i = 0; i < PESEL_LEN; i++) {
-                peselBytes[i] = Byte.parseByte(utilPeselStr.substring(i, i + 1));
-            }
         }
 
         private boolean isValid() throws InvalidPeselException {
@@ -151,20 +164,6 @@ public class Pesel {
             return (year % 4 == 0 && year % 100 != 0 || year % 400 == 0);
         }
 
-    }
-
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Pesel)) return false;
-        Pesel pesel = (Pesel) o;
-        return Objects.equals(peselStr, pesel.peselStr);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(peselStr);
     }
 
 
