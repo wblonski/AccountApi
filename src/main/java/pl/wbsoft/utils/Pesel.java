@@ -1,6 +1,6 @@
 package pl.wbsoft.utils;
 
-import pl.wbsoft.error.InvalidPesel;
+import pl.wbsoft.error.InvalidPeselException;
 
 import java.time.LocalDate;
 import java.util.Objects;
@@ -9,13 +9,13 @@ public class Pesel {
 
     private final String peselStr;
 
-    public Pesel(String peselStr) throws InvalidPesel {
+    public Pesel(String peselStr) throws InvalidPeselException {
 
         PeselValidator validator = new PeselValidator(peselStr);
         if (validator.isValid()) {
             this.peselStr = peselStr;
         } else {
-            throw new InvalidPesel("");
+            throw new InvalidPeselException("");
         }
     }
 
@@ -23,7 +23,7 @@ public class Pesel {
         try {
             PeselValidator validator = new PeselValidator(peselStr);
             return validator.getBirthDate();
-        } catch (InvalidPesel e) {
+        } catch (InvalidPeselException e) {
             // ten wyjątek nie ma prawa się pojawić,
             // bo jeśli istnieje obiekt Pesel, to został już zwalidowany w chwili utworzenia
             throw new RuntimeException();
@@ -40,14 +40,14 @@ public class Pesel {
         private static final int PESEL_LEN = 11;
         private final byte[] peselBytes = new byte[PESEL_LEN];
 
-        public LocalDate getBirthDate() throws InvalidPesel {
+        public LocalDate getBirthDate() throws InvalidPeselException {
             int birthYear = getBirthYear();
             int birthMonth = getBirthMonth();
             int birthDay = getBirthDay();
             return LocalDate.of(birthYear, birthMonth, birthDay);
         }
 
-        private int getBirthYear() throws InvalidPesel {
+        private int getBirthYear() throws InvalidPeselException {
             int year = (10 * peselBytes[0]) + peselBytes[1];
             int month = 10 * peselBytes[2] + peselBytes[3];
             if (month >= 1 && month <= 12) {
@@ -61,11 +61,11 @@ public class Pesel {
             } else if (month >= 81 && month <= 92) {
                 year += 1800;
             } else
-                throw new InvalidPesel();
+                throw new InvalidPeselException();
             return year;
         }
 
-        private int getBirthMonth() throws InvalidPesel {
+        private int getBirthMonth() throws InvalidPeselException {
             int month = 10 * peselBytes[2] + peselBytes[3];
             if (month >= 1 && month <= 12) {
                 month -= 0;
@@ -78,7 +78,7 @@ public class Pesel {
             } else if (month >= 81 && month <= 92) {
                 month -= 80;
             } else
-                throw new InvalidPesel();
+                throw new InvalidPeselException();
             return month;
         }
 
@@ -86,16 +86,16 @@ public class Pesel {
             return 10 * peselBytes[4] + peselBytes[5];
         }
 
-        public PeselValidator(String utilPeselStr) throws InvalidPesel {
+        public PeselValidator(String utilPeselStr) throws InvalidPeselException {
             if (utilPeselStr.length() != PESEL_LEN) {
-                throw new InvalidPesel("");
+                throw new InvalidPeselException("");
             }
             for (int i = 0; i < PESEL_LEN; i++) {
                 peselBytes[i] = Byte.parseByte(utilPeselStr.substring(i, i + 1));
             }
         }
 
-        private boolean isValid() throws InvalidPesel {
+        private boolean isValid() throws InvalidPeselException {
             return isValidControlSum() && isValidBirthMonth() && isValidBirthDay();
         }
 
@@ -116,12 +116,12 @@ public class Pesel {
             return (sum == peselBytes[10]);
         }
 
-        private boolean isValidBirthMonth() throws InvalidPesel {
+        private boolean isValidBirthMonth() throws InvalidPeselException {
             int month = getBirthMonth();
             return (month >= 1 && month <= 12);
         }
 
-        private boolean isValidBirthDay() throws InvalidPesel {
+        private boolean isValidBirthDay() throws InvalidPeselException {
             int year = getBirthYear();
             int month = getBirthMonth();
             int day = getBirthDay();
@@ -143,7 +143,7 @@ public class Pesel {
                     return (day >= 1 && day <= 29 && leapYear(year)) ||
                             (day >= 1 && day <= 28 && !leapYear(year));
                 default:
-                    throw new InvalidPesel();
+                    throw new InvalidPeselException();
             }
         }
 

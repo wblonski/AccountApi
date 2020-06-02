@@ -12,17 +12,17 @@ import java.io.IOException;
 public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
     // Let Spring handle the exception, we just override the status code
-    @ExceptionHandler(InvalidParam.class)
+    @ExceptionHandler(InvalidParamException.class)
     public void springHandleNotFound(HttpServletResponse response) throws IOException {
         response.sendError(HttpStatus.BAD_REQUEST.value());
     }
 
-    @ExceptionHandler(AccountExists.class)
+    @ExceptionHandler(AccountExistsException.class)
     public void springHandleAccountExists(HttpServletResponse response) throws IOException {
         response.sendError(HttpStatus.ALREADY_REPORTED.value());
     }
 
-    @ExceptionHandler(NotAdultClient.class)
+    @ExceptionHandler(NotAdultClientException.class)
     public void springHandleNotAdultClient(HttpServletResponse response) throws IOException {
         response.sendError(HttpStatus.EXPECTATION_FAILED.value());
     }
