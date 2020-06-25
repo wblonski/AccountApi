@@ -1,4 +1,4 @@
-package pl.wbsoft.error;
+package pl.wbsoft.errors;
 
 public class AccountExistsException extends Exception {
 

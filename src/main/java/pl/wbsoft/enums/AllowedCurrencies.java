@@ -8,7 +8,7 @@ public enum AllowedCurrencies {
         name = curencyName;
     }
 
-    public static Boolean areAllowed(String... curencyNames) {
+    public static boolean areAllowed(String... curencyNames) {
         try {
             for (String name : curencyNames) {
                 AllowedCurrencies.valueOf(name);

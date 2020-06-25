@@ -1,6 +1,6 @@
 package pl.wbsoft.utils;
 
-import pl.wbsoft.error.InvalidPeselException;
+import pl.wbsoft.errors.InvalidPeselException;
 
 import java.time.LocalDate;
 import java.util.Objects;
@@ -9,14 +9,17 @@ public class Pesel {
 
     private final String peselStr;
 
-    public Pesel(String peselStr) throws InvalidPeselException {
-
-        PeselValidator validator = new PeselValidator(peselStr);
-        if (validator.isValid()) {
-            this.peselStr = peselStr;
-        } else {
-            throw new InvalidPeselException("");
+    public static boolean isValidPeselStr(String peselStr) {
+        try {
+            PeselValidator validator = new PeselValidator(peselStr);
+            return validator.isValid();
+        } catch (Exception ex) {
+            return false;
         }
+    }
+
+    public Pesel(String peselStr) {
+        this.peselStr = peselStr;
     }
 
     public LocalDate getBirthDate() {
@@ -48,7 +51,7 @@ public class Pesel {
         return Objects.hash(peselStr);
     }
 
-    private class PeselValidator {
+    private static class PeselValidator {
 
         private static final int PESEL_LEN = 11;
         private final byte[] peselBytes = new byte[PESEL_LEN];

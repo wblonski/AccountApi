@@ -1,10 +1,12 @@
 package pl.wbsoft.entities;
 
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Map;
-import java.util.Objects;
 
 @Entity
 public class Account implements Serializable {
@@ -12,22 +14,25 @@ public class Account implements Serializable {
     private String pesel;
     private String name;
     private String surname;
-    private String amountPLN;
-    private String amountUSD;
+    @ElementCollection
+    private Map<String, BigDecimal> subAccounts;
 
     public Account() {
     }
 
-    public Account(Map<String, String> params) {
-        pesel = params.get("pesel");
-        name = params.get("name");
-        surname = params.get("surname");
-        amountPLN = params.get("amountPLN");
-        amountUSD = params.get("amountUSD");
+    public Account(@NotNull Map<String, String> params, @NotNull Map<String, BigDecimal> subAccounts) {
+        this.pesel = params.get("pesel");
+        this.name = params.get("name");
+        this.surname = params.get("surname");
+        this.subAccounts.putAll(subAccounts);
     }
 
     public String getPesel() {
         return pesel;
+    }
+
+    public BigDecimal getSubValue(String key) {
+        return subAccounts.get(key);
     }
 
     public void setPesel(String pesel) {
@@ -50,36 +55,25 @@ public class Account implements Serializable {
         this.surname = surname;
     }
 
-    public String getAmountPLN() {
-        return amountPLN;
+    public Map<String, BigDecimal> getSubAccounts() {
+        return subAccounts;
     }
 
-    public void setAmountPLN(String amountPLN) {
-        this.amountPLN = amountPLN;
+    public void setSubAccounts(Map<String, BigDecimal> subAccounts) {
+        this.subAccounts = subAccounts;
     }
 
-    public String getAmountUSD() {
-        return amountUSD;
-    }
-
-    public void setAmountUSD(String amountUSD) {
-        this.amountUSD = amountUSD;
+    public void setSubValue(String key, BigDecimal value) {
+        subAccounts.put(key, value);
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Account)) return false;
-        Account account = (Account) o;
-        return pesel.equals(account.pesel) &&
-                name.equals(account.name) &&
-                surname.equals(account.surname) &&
-                amountPLN.equals(account.amountPLN) &&
-                amountUSD.equals(account.amountUSD);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(pesel, name, surname, amountPLN, amountUSD);
+    public String toString() {
+        return "Account{" +
+                "pesel='" + pesel + '\'' +
+                ", name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
+                ", subAccounts=" + subAccounts +
+                '}';
     }
 }
