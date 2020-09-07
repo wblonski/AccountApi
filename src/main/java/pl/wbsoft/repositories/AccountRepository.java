@@ -4,6 +4,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import pl.wbsoft.entities.Account;
 
 
-public interface AccountReposiotory extends JpaRepository<Account, String> {
+public interface AccountRepository extends JpaRepository<Account, String> {
 
 }

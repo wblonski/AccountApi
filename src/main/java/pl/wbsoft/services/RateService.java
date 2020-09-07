@@ -1,10 +1,10 @@
 package pl.wbsoft.services;
 
-import pl.wbsoft.errors.InvalidParamException;
+import pl.wbsoft.exceptions.ExternalExchangeServiceException;
 
 import java.math.BigDecimal;
 
 public interface RateService {
-
-    BigDecimal getCurrentExchangeRate(String currencyName) throws InvalidParamException;
+    
+    BigDecimal getCurrentExchangeRate(String currencyName) throws ExternalExchangeServiceException;
 }

@@ -2,16 +2,16 @@ package pl.wbsoft.entities;
 
 import java.util.List;
 
-public class ExchangeRatesSeries {
+public class ExchangeRatesData {
     String Table;
     String Currency;
     String Code;
     List<Rate> Rates;
-
+    
     public String getTable() {
         return Table;
     }
-
+    
     public void setTable(String table) {
         Table = table;
     }
