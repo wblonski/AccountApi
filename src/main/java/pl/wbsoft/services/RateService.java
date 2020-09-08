@@ -1,6 +1,6 @@
 package pl.wbsoft.services;
 
-import pl.wbsoft.exceptions.ExternalExchangeServiceException;
+import pl.wbsoft.exception.ExternalExchangeServiceException;
 
 import java.math.BigDecimal;
 

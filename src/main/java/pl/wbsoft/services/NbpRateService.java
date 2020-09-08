@@ -2,9 +2,9 @@ package pl.wbsoft.services;
 
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
-import pl.wbsoft.entities.ExchangeRatesData;
-import pl.wbsoft.entities.Rate;
-import pl.wbsoft.exceptions.ExternalExchangeServiceException;
+import pl.wbsoft.dto.nbp.ExchangeRatesData;
+import pl.wbsoft.dto.nbp.Rate;
+import pl.wbsoft.exception.ExternalExchangeServiceException;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -22,7 +22,6 @@ public class NbpRateService implements RateService {
     
     public NbpRateService() {
         this.restTemplate = new RestTemplate();
-        
     }
     
     @Override

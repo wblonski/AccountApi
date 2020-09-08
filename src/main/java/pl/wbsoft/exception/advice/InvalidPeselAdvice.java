@@ -1,4 +1,4 @@
-package pl.wbsoft.exceptions.advices;
+package pl.wbsoft.exception.advice;
 
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 

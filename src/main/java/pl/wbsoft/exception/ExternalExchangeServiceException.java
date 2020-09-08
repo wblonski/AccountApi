@@ -1,4 +1,4 @@
-package pl.wbsoft.exceptions;
+package pl.wbsoft.exception;
 
 public class ExternalExchangeServiceException extends Exception {
     

@@ -1,8 +1,8 @@
 package pl.wbsoft.services;
 
-import pl.wbsoft.entities.Account;
-import pl.wbsoft.exceptions.*;
-import pl.wbsoft.pojos.Order;
+import pl.wbsoft.dto.Order;
+import pl.wbsoft.entity.Account;
+import pl.wbsoft.exception.*;
 
 import java.util.Optional;
 

@@ -1,4 +1,4 @@
-package pl.wbsoft.entities;
+package pl.wbsoft.entity;
 
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
@@ -31,37 +31,21 @@ public class Account implements Serializable {
     public String getPesel() {
         return pesel;
     }
-    
-    public BigDecimal getSubValue(String key) {
-        return currencies.get(key);
-    }
-
-    public void setPesel(String pesel) {
-        this.pesel = pesel;
-    }
 
     public String getName() {
         return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
     
     public String getSurname() {
         return surname;
     }
     
-    public void setSurname(String surname) {
-        this.surname = surname;
-    }
-    
     public Map<String, BigDecimal> getCurrencies() {
         return currencies;
     }
     
-    public void setCurrencies(Map<String, BigDecimal> subAccounts) {
-        this.currencies = subAccounts;
+    public BigDecimal getSubValue(String key) {
+        return currencies.get(key);
     }
     
     public void setSubValue(String key, BigDecimal value) {

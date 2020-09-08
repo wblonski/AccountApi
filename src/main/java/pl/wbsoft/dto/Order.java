@@ -1,4 +1,4 @@
-package pl.wbsoft.pojos;
+package pl.wbsoft.dto;
 
 import java.io.Serializable;
 import java.math.BigDecimal;

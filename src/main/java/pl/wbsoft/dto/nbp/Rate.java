@@ -1,4 +1,4 @@
-package pl.wbsoft.entities;
+package pl.wbsoft.dto.nbp;
 
 public class Rate {
     private String No;

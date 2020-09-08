@@ -2,9 +2,9 @@ package pl.wbsoft.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import pl.wbsoft.entities.Account;
-import pl.wbsoft.exceptions.*;
-import pl.wbsoft.pojos.Order;
+import pl.wbsoft.dto.Order;
+import pl.wbsoft.entity.Account;
+import pl.wbsoft.exception.*;
 import pl.wbsoft.repositories.AccountRepository;
 import pl.wbsoft.utils.Pesel;
 

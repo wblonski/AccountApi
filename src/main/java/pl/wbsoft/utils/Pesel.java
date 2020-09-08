@@ -1,6 +1,6 @@
 package pl.wbsoft.utils;
 
-import pl.wbsoft.exceptions.InvalidPeselException;
+import pl.wbsoft.exception.InvalidPeselException;
 
 import java.time.LocalDate;
 import java.util.Objects;

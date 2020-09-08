@@ -3,9 +3,9 @@ package pl.wbsoft.api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import pl.wbsoft.entities.Account;
-import pl.wbsoft.exceptions.*;
-import pl.wbsoft.pojos.Order;
+import pl.wbsoft.dto.Order;
+import pl.wbsoft.entity.Account;
+import pl.wbsoft.exception.*;
 import pl.wbsoft.services.AccountService;
 import pl.wbsoft.utils.Pesel;
 
