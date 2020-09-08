@@ -20,6 +20,8 @@ import static java.math.BigDecimal.ZERO;
 @Service
 public class AccountServiceImpl implements AccountService {
     
+    public static final int ADULT_AGE = 18;
+    
     public static final RoundingMode ROUND_TYPE = RoundingMode.FLOOR;
     private static final int PRECISION = 4;
     private static final MathContext mathContext = new MathContext(PRECISION, ROUND_TYPE);
@@ -44,7 +46,7 @@ public class AccountServiceImpl implements AccountService {
             AccountJustExistsException {
         
         Pesel.validatePeselStr(newAccount.getPesel());
-        if (!Pesel.isAdultPeselOwner(newAccount.getPesel(), 18)) {
+        if (!Pesel.isAdultPeselOwner(newAccount.getPesel(), ADULT_AGE)) {
             throw new NotAdultClientException(newAccount.getPesel());
         }
         if (accountExists(newAccount.getPesel())) {

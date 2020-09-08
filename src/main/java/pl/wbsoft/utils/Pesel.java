@@ -53,7 +53,7 @@ public class Pesel {
     
     private static class PeselValidator {
         
-        private static final String INVALID_PESEL_LENGTH = "Invalid pesel string lenght. ";
+        private static final String INVALID_PESEL_LENGTH = "Invalid pesel string length. ";
         private static final String INVALID_PESEL_CONTROL_SUM = "Invalid pesel control sum. ";
         private static final String INVALID_PESEL_YEAR = "Invalid pesel year of birth. ";
         private static final String INVALID_PESEL_MONTH = "Invalid pesel month of birth. ";
@@ -74,22 +74,22 @@ public class Pesel {
         
         private void validate() throws InvalidPeselException {
             validatePeselChars();
-            validatePeselLenght();
+            validatePeselLength();
             validateControlSum();
             validateBirthMonth();
             validateBirthDay();
         }
-        
+    
         private void validatePeselChars() throws InvalidPeselException {
             if (!peselStr.matches("\\d*"))
                 throw new InvalidPeselException(INVALID_PESEL_CONTENT, peselStr);
         }
-        
-        private void validatePeselLenght() throws InvalidPeselException {
+    
+        private void validatePeselLength() throws InvalidPeselException {
             if (peselStr.length() != PESEL_LEN)
                 throw new InvalidPeselException(INVALID_PESEL_LENGTH, peselStr);
         }
-        
+    
         public LocalDate getBirthDate() throws InvalidPeselException {
             int birthYear = getBirthYear();
             int birthMonth = getBirthMonth();
@@ -137,17 +137,16 @@ public class Pesel {
         }
         
         private void validateControlSum() throws InvalidPeselException {
-            int sum =
-                    1 * peselValue(0) +
-                            3 * peselValue(1) +
-                            7 * peselValue(2) +
-                            9 * peselValue(3) +
-                            1 * peselValue(4) +
-                            3 * peselValue(5) +
-                            7 * peselValue(6) +
-                            9 * peselValue(7) +
-                            1 * peselValue(8) +
-                            3 * peselValue(9);
+            int sum = 1 * peselValue(0) +
+                    3 * peselValue(1) +
+                    7 * peselValue(2) +
+                    9 * peselValue(3) +
+                    1 * peselValue(4) +
+                    3 * peselValue(5) +
+                    7 * peselValue(6) +
+                    9 * peselValue(7) +
+                    1 * peselValue(8) +
+                    3 * peselValue(9);
             sum %= 10;
             sum = 10 - sum;
             sum %= 10;

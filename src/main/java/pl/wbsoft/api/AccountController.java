@@ -24,7 +24,7 @@ public class AccountController {
         this.accountService = accountService;
     }
     
-    @PutMapping
+    @PutMapping("/create")
     public Optional<Account> createAccount(@NotNull @Valid @RequestBody Account newAccount)
             throws InvalidPeselException, NotAdultClientException, AccountJustExistsException {
         
@@ -38,13 +38,15 @@ public class AccountController {
         return accountService.getAccountByPesel(pesel);
     }
     
-    @PostMapping
+    @PostMapping("/exchange")
     public Optional<Account> exchangeInAccount(@NotNull @Valid @RequestBody Order order)
             throws InvalidPeselException, AccountNotFoundException, ExternalExchangeServiceException, InvalidExchangeOrderParameterException {
         
         Pesel.validatePeselStr(order.getPesel());
         return accountService.exchangeInAccount(order.getPesel(), order);
     }
+    
+    // -----------------------------------------------------------------------------------------------------------------
     
     @ExceptionHandler(AccountJustExistsException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
